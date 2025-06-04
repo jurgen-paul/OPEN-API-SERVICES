@@ -1,0 +1,672 @@
+curl https://api.openai.com/v1/threads/thread_abc123/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "assistant_id": "asst_abc123"
+  }'
+curl https://api.openai.com/v1/threads/thread_123/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "assistant_id": "asst_123",
+    "stream": true
+  }'
+curl https://api.openai.com/v1/threads/thread_abc123/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "assistant_id": "asst_abc123",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_current_weather",
+          "description": "Get the current weather in a given location",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The city and state, e.g. San Francisco, CA"
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["celsius", "fahrenheit"]
+              }
+            },
+            "required": ["location"]
+          }
+        }
+      }
+    ],
+    "stream": true
+  }'
+curl https://api.openai.com/v1/threads/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+      "assistant_id": "asst_abc123",
+      "thread": {
+        "messages": [
+          {"role": "user", "content": "Explain deep learning to a 5 year old."}
+        ]
+      }
+    }'
+curl https://api.openai.com/v1/threads/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "assistant_id": "asst_123",
+    "thread": {
+      "messages": [
+        {"role": "user", "content": "Hello"}
+      ]
+    },
+    "stream": true
+  }'
+curl https://api.openai.com/v1/threads/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "assistant_id": "asst_abc123",
+    "thread": {
+      "messages": [
+        {"role": "user", "content": "What is the weather like in San Francisco?"}
+      ]
+    },
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_current_weather",
+          "description": "Get the current weather in a given location",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The city and state, e.g. San Francisco, CA"
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["celsius", "fahrenheit"]
+              }
+            },
+            "required": ["location"]
+          }
+        }
+      }
+    ],
+    "stream": true
+  }'
+curl https://api.openai.com/v1/threads/thread_abc123/runs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/threads/thread_abc123/runs/run_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/threads/thread_abc123/runs/run_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "metadata": {
+      "user_id": "user_abc123"
+    }
+  }'
+curl https://api.openai.com/v1/threads/thread_123/runs/run_123/submit_tool_outputs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "tool_outputs": [
+      {
+        "tool_call_id": "call_001",
+        "output": "70 degrees and sunny."
+      }
+    ]
+  }'
+curl https://api.openai.com/v1/threads/thread_123/runs/run_123/submit_tool_outputs \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "tool_outputs": [
+      {
+        "tool_call_id": "call_001",
+        "output": "70 degrees and sunny."
+      }
+    ],
+    "stream": true
+  }'
+curl https://api.openai.com/v1/threads/thread_abc123/runs/run_abc123/cancel \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -X POST
+{
+  "id": "run_abc123",
+  "object": "thread.run",
+  "created_at": 1698107661,
+  "assistant_id": "asst_abc123",
+  "thread_id": "thread_abc123",
+  "status": "completed",
+  "started_at": 1699073476,
+  "expires_at": null,
+  "cancelled_at": null,
+  "failed_at": null,
+  "completed_at": 1699073498,
+  "last_error": null,
+  "model": "gpt-4o",
+  "instructions": null,
+  "tools": [{"type": "file_search"}, {"type": "code_interpreter"}],
+  "metadata": {},
+  "incomplete_details": null,
+  "usage": {
+    "prompt_tokens": 123,
+    "completion_tokens": 456,
+    "total_tokens": 579
+  },
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "max_prompt_tokens": 1000,
+  "max_completion_tokens": 1000,
+  "truncation_strategy": {
+    "type": "auto",
+    "last_messages": null
+  },
+  "response_format": "auto",
+  "tool_choice": "auto",
+  "parallel_tool_calls": true
+}
+curl https://api.openai.com/v1/threads/thread_abc123/runs/run_abc123/steps \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/threads/thread_abc123/runs/run_abc123/steps/step_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+{
+  "id": "step_abc123",
+  "object": "thread.run.step",
+  "created_at": 1699063291,
+  "run_id": "run_abc123",
+  "assistant_id": "asst_abc123",
+  "thread_id": "thread_abc123",
+  "type": "message_creation",
+  "status": "completed",
+  "cancelled_at": null,
+  "completed_at": 1699063291,
+  "expired_at": null,
+  "failed_at": null,
+  "last_error": null,
+  "step_details": {
+    "type": "message_creation",
+    "message_creation": {
+      "message_id": "msg_abc123"
+    }
+  },
+  "usage": {
+    "prompt_tokens": 123,
+    "completion_tokens": 456,
+    "total_tokens": 579
+  }
+}
+{
+  "id": "msg_123",
+  "object": "thread.message.delta",
+  "delta": {
+    "content": [
+      {
+        "index": 0,
+        "type": "text",
+        "text": { "value": "Hello", "annotations": [] }
+      }
+    ]
+  }
+}
+{
+  "id": "step_123",
+  "object": "thread.run.step.delta",
+  "delta": {
+    "step_details": {
+      "type": "tool_calls",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_123",
+          "type": "code_interpreter",
+          "code_interpreter": { "input": "", "outputs": [] }
+        }
+      ]
+    }
+  }
+}
+event: thread.created
+data: {"id": "thread_123", "object": "thread", ...}
+curl https://api.openai.com/v1/organization/admin_api_keys?after=key_abc&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/admin_api_keys \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "name": "New Admin Key"
+  }'
+curl https://api.openai.com/v1/organization/admin_api_keys/key_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X DELETE https://api.openai.com/v1/organization/admin_api_keys/key_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+  "object": "organization.admin_api_key",
+  "id": "key_abc",
+  "name": "Main Admin Key",
+  "redacted_value": "sk-admin...xyz",
+  "created_at": 1711471533,
+  "last_used_at": 1711471534,
+  "owner": {
+    "type": "user",
+    "object": "organization.user",
+    "id": "user_123",
+    "name": "John Doe",
+    "created_at": 1711471533,
+    "role": "owner"
+  }
+}
+curl https://api.openai.com/v1/organization/invites?after=invite-abc&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/invites \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "email": "anotheruser@example.com",
+      "role": "reader",
+      "projects": [
+        {
+          "id": "project-xyz",
+          "role": "member"
+        },
+        {
+          "id": "project-abc",
+          "role": "owner"
+        }
+      ]
+  }'
+curl https://api.openai.com/v1/organization/invites/invite-abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X DELETE https://api.openai.com/v1/organization/invites/invite-abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+  "object": "organization.invite",
+  "id": "invite-abc",
+  "email": "user@example.com",
+  "role": "owner",
+  "status": "accepted",
+  "invited_at": 1711471533,
+  "expires_at": 1711471533,
+  "accepted_at": 1711471533,
+  "projects": [
+    {
+      "id": "project-xyz",
+      "role": "member"
+    }
+  ]
+}
+curl https://api.openai.com/v1/organization/users?after=user_abc&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/users/user_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "role": "owner"
+  }'
+curl https://api.openai.com/v1/organization/users/user_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X DELETE https://api.openai.com/v1/organization/users/user_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+    "object": "organization.user",
+    "id": "user_abc",
+    "name": "First Last",
+    "email": "user@example.com",
+    "role": "owner",
+    "added_at": 1711471533
+}
+curl https://api.openai.com/v1/organization/projects?after=proj_abc&limit=20&include_archived=false \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl https://api.openai.com/v1/organization/projects?after=proj_abc&limit=20&include_archived=false \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/projects \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "name": "Project ABC"
+  }'
+curl https://api.openai.com/v1/organization/projects/proj_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/projects/proj_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "name": "Project DEF"
+  }'
+curl -X POST https://api.openai.com/v1/organization/projects/proj_abc/archive \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+    "id": "proj_abc",
+    "object": "organization.project",
+    "name": "Project example",
+    "created_at": 1711471533,
+    "archived_at": null,
+    "status": "active"
+}
+curl https://api.openai.com/v1/organization/projects/proj_abc/users?after=user_abc&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl https://api.openai.com/v1/organization/projects/proj_abc/users?after=user_abc&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/projects/proj_abc/users \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "user_id": "user_abc",
+      "role": "member"
+  }'
+curl https://api.openai.com/v1/organization/projects/proj_abc/users/user_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/projects/proj_abc/users/user_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "role": "owner"
+  }'
+curl -X DELETE https://api.openai.com/v1/organization/projects/proj_abc/users/user_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+    "object": "organization.project.user",
+    "id": "user_abc",
+    "name": "First Last",
+    "email": "user@example.com",
+    "role": "owner",
+    "added_at": 1711471533
+}
+curl https://api.openai.com/v1/organization/projects/proj_abc/service_accounts?after=custom_id&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/projects/proj_abc/service_accounts \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "name": "Production App"
+  }'
+curl https://api.openai.com/v1/organization/projects/proj_abc/service_accounts/svc_acct_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X DELETE https://api.openai.com/v1/organization/projects/proj_abc/service_accounts/svc_acct_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+    "object": "organization.project.service_account",
+    "id": "svc_acct_abc",
+    "name": "Service Account",
+    "role": "owner",
+    "created_at": 1711471533
+}
+curl https://api.openai.com/v1/organization/projects/proj_abc/api_keys?after=key_abc&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl https://api.openai.com/v1/organization/projects/proj_abc/api_keys/key_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X DELETE https://api.openai.com/v1/organization/projects/proj_abc/api_keys/key_abc \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+{
+    "object": "organization.project.api_key",
+    "redacted_value": "sk-abc...def",
+    "name": "My API Key",
+    "created_at": 1711471533,
+    "last_used_at": 1711471534,
+    "id": "key_abc",
+    "owner": {
+        "type": "user",
+        "user": {
+            "object": "organization.project.user",
+            "id": "user_abc",
+            "name": "First Last",
+            "email": "user@example.com",
+            "role": "owner",
+            "created_at": 1711471533
+        }
+    }
+}
+curl https://api.openai.com/v1/organization/projects/proj_abc/rate_limits?after=rl_xxx&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl https://api.openai.com/v1/organization/projects/proj_abc/rate_limits?after=rl_xxx&limit=20 \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json"
+curl -X POST https://api.openai.com/v1/organization/projects/proj_abc/rate_limits/rl_xxx \
+  -H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "max_requests_per_1_minute": 500
+  }'
+{
+    "object": "project.rate_limit",
+    "id": "rl_ada",
+    "model": "ada",
+    "max_requests_per_1_minute": 600,
+    "max_tokens_per_1_minute": 150000,
+    "max_images_per_1_minute": 10
+}
+curl https://api.openai.com/v1/organization/audit_logs \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "id": "req_xxx_20240101",
+    "type": "api_key.created",
+    "effective_at": 1720804090,
+    "actor": {
+        "type": "session",
+        "session": {
+            "user": {
+                "id": "user-xxx",
+                "email": "user@example.com"
+            },
+            "ip_address": "127.0.0.1",
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+    },
+    "api_key.created": {
+        "id": "key_xxxx",
+        "data": {
+            "scopes": ["resource.operation"]
+        }
+    }
+}
+curl "https://api.openai.com/v1/organization/usage/completions?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.completions.result",
+    "input_tokens": 5000,
+    "output_tokens": 1000,
+    "input_cached_tokens": 4000,
+    "input_audio_tokens": 300,
+    "output_audio_tokens": 200,
+    "num_model_requests": 5,
+    "project_id": "proj_abc",
+    "user_id": "user-abc",
+    "api_key_id": "key_abc",
+    "model": "gpt-4o-mini-2024-07-18",
+    "batch": false
+}
+curl "https://api.openai.com/v1/organization/usage/embeddings?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.embeddings.result",
+    "input_tokens": 20,
+    "num_model_requests": 2,
+    "project_id": "proj_abc",
+    "user_id": "user-abc",
+    "api_key_id": "key_abc",
+    "model": "text-embedding-ada-002-v2"
+}
+curl "https://api.openai.com/v1/organization/usage/moderations?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.moderations.result",
+    "input_tokens": 20,
+    "num_model_requests": 2,
+    "project_id": "proj_abc",
+    "user_id": "user-abc",
+    "api_key_id": "key_abc",
+    "model": "text-moderation"
+}
+curl "https://api.openai.com/v1/organization/usage/images?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.images.result",
+    "images": 2,
+    "num_model_requests": 2,
+    "size": "1024x1024",
+    "source": "image.generation",
+    "project_id": "proj_abc",
+    "user_id": "user-abc",
+    "api_key_id": "key_abc",
+    "model": "dall-e-3"
+}
+curl "https://api.openai.com/v1/organization/usage/audio_speeches?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.audio_speeches.result",
+    "characters": 45,
+    "num_model_requests": 1,
+    "project_id": "proj_abc",
+    "user_id": "user-abc",
+    "api_key_id": "key_abc",
+    "model": "tts-1"
+}
+curl "https://api.openai.com/v1/organization/usage/audio_transcriptions?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.audio_transcriptions.result",
+    "seconds": 10,
+    "num_model_requests": 1,
+    "project_id": "proj_abc",
+    "user_id": "user-abc",
+    "api_key_id": "key_abc",
+    "model": "tts-1"
+}
+curl "https://api.openai.com/v1/organization/usage/vector_stores?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.vector_stores.result",
+    "usage_bytes": 1024,
+    "project_id": "proj_abc"
+}
+curl "https://api.openai.com/v1/organization/usage/code_interpreter_sessions?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.usage.code_interpreter_sessions.result",
+    "num_sessions": 1,
+    "project_id": "proj_abc"
+}
+curl "https://api.openai.com/v1/organization/costs?start_time=1730419200&limit=1" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json"
+{
+    "object": "organization.costs.result",
+    "amount": {
+      "value": 0.06,
+      "currency": "usd"
+    },
+    "line_item": "Image models",
+    "project_id": "proj_abc"
+}
+curl -X POST https://api.openai.com/v1/organization/certificates \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "My Example Certificate",
+  "certificate": "-----BEGIN CERTIFICATE-----\\nMIIDeT...\\n-----END CERTIFICATE-----"
+}'
+curl "https://api.openai.com/v1/organization/certificates/cert_abc?include[]=content" \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY"
+curl -X POST https://api.openai.com/v1/organization/certificates/cert_abc \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "Renamed Certificate"
+}'
+curl -X DELETE https://api.openai.com/v1/organization/certificates/cert_abc \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY"
+curl https://api.openai.com/v1/organization/certificates \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY"
+curl https://api.openai.com/v1/organization/projects/proj_abc/certificates \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY"
+curl https://api.openai.com/v1/organization/certificates/activate \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "data": ["cert_abc", "cert_def"]
+}'
+curl https://api.openai.com/v1/organization/certificates/deactivate \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "data": ["cert_abc", "cert_def"]
+}'
+curl https://api.openai.com/v1/organization/projects/proj_abc/certificates/activate \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "data": ["cert_abc", "cert_def"]
+}'
+curl https://api.openai.com/v1/organization/projects/proj_abc/certificates/deactivate \
+-H "Authorization: Bearer $OPENAI_ADMIN_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "data": ["cert_abc", "cert_def"]
+}'
+{
+  "object": "certificate",
+  "id": "cert_abc",
+  "name": "My Certificate",
+  "created_at": 1234567,
+  "certificate_details": {
+    "valid_at": 1234567,
+    "expires_at": 12345678,
+    "content": "-----BEGIN CERTIFICATE----- MIIGAjCCA...6znFlOW+ -----END CERTIFICATE-----"
+  }
+}

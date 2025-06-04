@@ -1,0 +1,14 @@
+# OPEN-API-SERVICES
+https://github.com/jurgen-paul/OPEN-API-SERVICES.git
+echo "# OPEN-API-SERVICES" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jurgen-paul/OPEN-API-SERVICES.git
+git push -u origin main
+
+git remote add origin https://github.com/jurgen-paul/OPEN-API-SERVICES.git
+git branch -M main
+git push -u origin main
+

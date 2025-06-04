@@ -1,0 +1,190 @@
+curl https://api.openai.com/v1/vector_stores \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "name": "Support FAQ"
+  }'
+curl https://api.openai.com/v1/vector_stores \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/vector_stores/vs_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/vector_stores/vs_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+  -d '{
+    "name": "Support FAQ"
+  }'
+curl https://api.openai.com/v1/vector_stores/vs_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -X DELETE
+curl -X POST \
+https://api.openai.com/v1/vector_stores/vs_abc123/search \
+-H "Authorization: Bearer $OPENAI_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{"query": "What is the return policy?", "filters": {...}}'
+{
+  "id": "vs_123",
+  "object": "vector_store",
+  "created_at": 1698107661,
+  "usage_bytes": 123456,
+  "last_active_at": 1698107661,
+  "name": "my_vector_store",
+  "status": "completed",
+  "file_counts": {
+    "in_progress": 0,
+    "completed": 100,
+    "cancelled": 0,
+    "failed": 0,
+    "total": 100
+  },
+  "last_used_at": 1698107661
+}
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files \
+    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -H "Content-Type: application/json" \
+    -H "OpenAI-Beta: assistants=v2" \
+    -d '{
+      "file_id": "file-abc123"
+    }'
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files/file-abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl \
+https://api.openai.com/v1/vector_stores/vs_abc123/files/file-abc123/content \
+-H "Authorization: Bearer $OPENAI_API_KEY"
+curl https://api.openai.com/v1/vector_stores/{vector_store_id}/files/{file_id} \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"attributes": {"key1": "value1", "key2": 2}}'
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files/file-abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -X DELETE
+{
+  "id": "file-abc123",
+  "object": "vector_store.file",
+  "usage_bytes": 1234,
+  "created_at": 1698107661,
+  "vector_store_id": "vs_abc123",
+  "status": "completed",
+  "last_error": null,
+  "chunking_strategy": {
+    "type": "static",
+    "static": {
+      "max_chunk_size_tokens": 800,
+      "chunk_overlap_tokens": 400
+    }
+  }
+}
+curl https://api.openai.com/v1/vector_stores/vs_abc123/file_batches \
+    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -H "Content-Type: application/json \
+    -H "OpenAI-Beta: assistants=v2" \
+    -d '{
+      "file_ids": ["file-abc123", "file-abc456"]
+    }'
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files_batches/vsfb_abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files_batches/vsfb_abc123/cancel \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -X POST
+curl https://api.openai.com/v1/vector_stores/vs_abc123/files_batches/vsfb_abc123/files \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "OpenAI-Beta: assistants=v2"
+{
+  "id": "vsfb_123",
+  "object": "vector_store.files_batch",
+  "created_at": 1698107661,
+  "vector_store_id": "vs_abc123",
+  "status": "completed",
+  "file_counts": {
+    "in_progress": 0,
+    "completed": 100,
+    "failed": 0,
+    "cancelled": 0,
+    "total": 100
+  }
+}
+curl https://api.openai.com/v1/containers \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "name": "My Container"
+      }'
+curl https://api.openai.com/v1/containers \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+curl https://api.openai.com/v1/containers/cntr_682dfebaacac8198bbfe9c2474fb6f4a085685cbe3cb5863 \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+curl -X DELETE https://api.openai.com/v1/containers/cntr_682dfebaacac8198bbfe9c2474fb6f4a085685cbe3cb5863 \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+{
+   "id": "cntr_682dfebaacac8198bbfe9c2474fb6f4a085685cbe3cb5863",
+   "object": "container",
+   "created_at": 1747844794,
+   "status": "running",
+   "expires_after": {
+     "anchor": "last_active_at",
+     "minutes": 20
+   },
+   "last_active_at": 1747844794,
+   "name": "My Container"
+}
+curl https://api.openai.com/v1/containers/cntr_682e0e7318108198aa783fd921ff305e08e78805b9fdbb04/files \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -F file="@example.txt"
+curl https://api.openai.com/v1/containers/cntr_682e0e7318108198aa783fd921ff305e08e78805b9fdbb04/files \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+curl https://api.openai.com/v1/containers/container_123/files/file_456 \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+curl https://api.openai.com/v1/containers/container_123/files/cfile_456/content \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+curl -X DELETE https://api.openai.com/v1/containers/cntr_682dfebaacac8198bbfe9c2474fb6f4a085685cbe3cb5863/files/cfile_682e0e8a43c88191a7978f477a09bdf5 \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+{
+    "id": "cfile_682e0e8a43c88191a7978f477a09bdf5",
+    "object": "container.file",
+    "created_at": 1747848842,
+    "bytes": 880,
+    "container_id": "cntr_682e0e7318108198aa783fd921ff305e08e78805b9fdbb04",
+    "path": "/mnt/data/88e12fa445d32636f190a0b33daed6cb-tsconfig.json",
+    "source": "user"
+}
+curl "https://api.openai.com/v1/assistants" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "instructions": "You are a personal math tutor. When asked a question, write and run Python code to answer the question.",
+    "name": "Math Tutor",
+    "tools": [{"type": "code_interpreter"}],
+    "model": "gpt-4o"
+  }'
+curl https://api.openai.com/v1/assistants \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "instructions": "You are an HR bot, and you have access to files to answer employee questions about company policies.",
+    "tools": [{"type": "file_search"}],
+    "tool_resources": {"file_search": {"vector_store_ids": ["vs_123"]}},
+    "model": "gpt-4o"
+  }'
